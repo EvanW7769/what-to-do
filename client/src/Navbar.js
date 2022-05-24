@@ -1,14 +1,46 @@
 import { useState } from "react";
 import "./navbar.css";
+import {useNavigate, Route, NavLink, BrowserRouter as Router} from 'react-router-dom'
+import { Button} from 'react-bootstrap';
 
-export default function Navbar() {
+
+export default function Navbar({setCurrentUser, currentUser}) {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
+
+  const navigate = useNavigate();
+
+  const goToMatches = () => {
+      navigate('/matches')
+  }
+
+  const goToHome = () => {
+    navigate('/Homepage')
+}
+
+const goToAddPlace =() =>{
+  navigate('/addPlace')
+}
+
+const goToLogin = ()=>{
+  navigate('/')
+}
+
+const handleLogout =()=>{
+
+  fetch("/logout", {method: "DELETE"})
+  .then(r => r.json())
+  .then( deleteResponse => {setCurrentUser(null)})
+
+ goToLogin()
+
+}
 
   return (
     <nav className="navigation">
-      <a href="/" className="brand-name">
+      <a href="/Homepage" className="brand-name">
         What to Do
       </a>
+      {/* <a>Hey there {currentUser.name}, swipe through the locations and pick the ones you're interested in</a> */}
       <button
         className="hamburger"
         onClick={() => {
@@ -36,13 +68,18 @@ export default function Navbar() {
       >
         <ul>
           <li>
-            <a href="/home">Home</a>
+            <Button className='navbuttons' onClick={goToHome}>Home</Button>
           </li>
           <li>
-            <a href="/about">About</a>
+            <Button className='navbuttons' onClick={goToMatches}>Matches</Button>
           </li>
           <li>
-            <a href="/contact">Contact</a>
+          <Button className='navbuttons' onClick={goToAddPlace}>Add Location</Button>
+
+          </li>
+          <li>
+          <Button className='navbuttons' onClick={handleLogout}>Log Out</Button>
+
           </li>
         </ul>
       </div>
