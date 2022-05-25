@@ -10,6 +10,7 @@ function Signup() {
       navigate('/')
   }
 
+  const [signupErrors, setSignupErrors] = useState('')
   const [confPassword, setConfPassword] =useState('')
   const [newUser, setNewUser] = useState({
 
@@ -58,7 +59,7 @@ const handleConfPassword=(e)=>{
     console.log(confPassword)
 
     if (newUser.password !== confPassword) {
-      console.log("Password Not Match");
+      alert("Passwords Do Not Match");
     } 
     
     else {
@@ -69,14 +70,33 @@ const handleConfPassword=(e)=>{
         body: JSON.stringify( newUser )
       } 
       )
-      .then( r => r.json())
-      .then(newestUser=> console.log(newestUser)
-      )
-    e.preventDefault();
-    alert("Thank you for signing up! You will now be redirected to the Sign In page.")
-    goToLogin()}
-  }
+      .then(res => {
+        if (res.ok) {
+          console.log(res)
+          res.json().then(alert("Thank you, you will now be redirected to the Sign In page."))
+          goToLogin()
+        } else {
+          res.json().then(err => {
+            console.log(err)
+            alert(`${err.errors[0]}`)
+          })
+        }
+      })
+    
+  }}
   
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <div className="Signup">
       <header className="Signup-header">

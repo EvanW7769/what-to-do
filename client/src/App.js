@@ -19,6 +19,8 @@ function App() {
   const [matchExist, setMatchExist] = useState(false)
 
 
+  console.log(currentUser)
+
 
   // const options = {
   //   method: 'POST',

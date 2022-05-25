@@ -24,7 +24,7 @@ function Matches({currentPlace}){
 
 console.log(matches)
     return(
-        <>
+        <div className="homepage-background">
         <Navbar/>
         {matchCheck() ? 
          (<ul className="Mcards">
@@ -36,7 +36,7 @@ console.log(matches)
             </ul>)
             :
             (<h1 className="matchgreeting">You dont have any matches yet! Try going back to to the home page and adding locations that interest you to see them here.</h1>)}
-        </>
+        </div>
     )
 }
 

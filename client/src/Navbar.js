@@ -28,9 +28,8 @@ const goToLogin = ()=>{
 const handleLogout =()=>{
 
   fetch("/logout", {method: "DELETE"})
-  .then(r => r.json())
-  .then( deleteResponse => {setCurrentUser(null)})
 
+console.log(currentUser)
  goToLogin()
 
 }

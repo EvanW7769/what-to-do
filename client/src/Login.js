@@ -63,7 +63,7 @@ function Login({currentUser, setCurrentUser}){
             //   history.push('/groups')
               res.json().then(err => {
                 setErrors(err)
-                alert(`${errors}`)
+                alert(`${err.error}`)
               })
             }
           })

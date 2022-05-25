@@ -53,9 +53,6 @@ class SessionController < ApplicationController
 
     render json:{}
 
-
-
-
     end
 
 

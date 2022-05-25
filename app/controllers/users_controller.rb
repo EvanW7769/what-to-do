@@ -16,20 +16,18 @@ end
 
 
 def create 
+    
+    # byebug 
 
-    new_user = User.create!(
+    new_user = User.create(
 
-        name: params[:name],
-        username: params[:username],
-        email: params[:email],
-        password: params[:password]
-
+       user_params
     )
 
     if new_user.valid?
-        render json: new_user
+        render json: new_user, status: :ok, serializer: UserSerializer 
     else 
-        render json: {errors: new_user.errors.full_messages}
+        render json: {errors: new_user.errors.full_messages}, status: :unprocessable_entity
         # user_unable_to_create(new_user)
     end
 end
